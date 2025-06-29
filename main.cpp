@@ -31,7 +31,6 @@ int main()
 
     // Font and text settings
     sf::Font font;
-    // Try multiple font paths for better compatibility
     if (!font.loadFromFile("C:/Windows/Fonts/arial.ttf")) {
         if (!font.loadFromFile("arial.ttf")) {
             if (!font.loadFromFile("fonts/arial.ttf")) {
@@ -60,13 +59,13 @@ int main()
                 window.close();
         }
 
-        // Delta time hesapla (input throttling için)
+        // Calculate deltaTime
         double deltaTime = clock.restart().asSeconds();
         static double inputTimer = 0;
         inputTimer += deltaTime;
 
         if (isSetting) {
-            // Input throttling (0.1 saniyede bir)
+            // Input throttling 
             if (inputTimer > 0.15) {
                 bool inputDetected = false;
 
@@ -101,37 +100,36 @@ int main()
                     inputDetected = true;
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)) {
-                    // Mevcut gezegen türüne göre hava direncini toggle et
+                    
                     if (std::abs(gravity - (-9.807)) < 0.001) {
-                        // Earth - 0.02 ile 0.0 arasýnda toggle
+                        // toggle air resistance
                         resistanceCoefficient = (resistanceCoefficient > 0.001) ? 0.0 : 0.02;
                     }
                     else if (std::abs(gravity - (-1.625)) < 0.001) {
-                        // Moon - Normalde hava direnci yok ama test için eklenebilir
                         resistanceCoefficient = 0.0;
                     }
                     else if (std::abs(gravity - (-3.728)) < 0.001) {
-                        // Mars - 0.006 ile 0.0 arasýnda toggle
+                        // toggle air resistance
                         resistanceCoefficient = (resistanceCoefficient > 0.001) ? 0.0 : 0.006;
                     }
                     inputDetected = true;
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
-                    // Mevcut gravity deðerine göre bir sonrakine geç
+                    // switch the gravity(Earth-Moon-Mars)
                     if (std::abs(gravity - (-9.807)) < 0.001) {
                         gravity = -1.625;  // Earth -> Moon
-                        resistanceCoefficient = 0.0;  // Ay'da atmosfer yok
+                        resistanceCoefficient = 0.0;  // no atmosphere in Moon
                     }
                     else if (std::abs(gravity - (-1.625)) < 0.001) {
                         gravity = -3.728;  // Moon -> Mars
-                        resistanceCoefficient = 0.006;  // Mars'ta ince atmosfer
+                        resistanceCoefficient = 0.006; // weak atmosphere in Mars
                     }
                     else if (std::abs(gravity - (-3.728)) < 0.001) {
                         gravity = -9.807;  // Mars -> Earth
-                        resistanceCoefficient = 0.02;  // Dünya'da yoðun atmosfer
+                        resistanceCoefficient = 0.02;  // Earth
                     }
                     else {
-                        gravity = -9.807;  // Default olarak Earth'e ayarla
+                        gravity = -9.807;  // Earth by default
                         resistanceCoefficient = 0.02;
                     }
 
@@ -145,7 +143,7 @@ int main()
                     velocityX = userSpeed * cos(radianAngle);
                     velocityY = userSpeed * sin(radianAngle);
 
-                    // Baþlangýç deðerlerini ayarla
+                    // set the initial values
                     Vector newPosition(positionX, positionY);
                     Vector newVelocity(velocityX, velocityY);
                     projectile.setPosition(newPosition);
@@ -154,16 +152,14 @@ int main()
                 }
 
                 if (inputDetected) {
-                    inputTimer = 0; // Timer'ý sýfýrla
+                    inputTimer = 0; // set timer
 
-                    // Pozisyonu güncelle
+                    // Pozisyonu gÃ¼ncelle
                     Vector newPosition(positionX, positionY);
                     projectile.setPosition(newPosition);
                 }
             }
-
-            // Setting modunda bilgi göster
-            // (Bu kýsmý sonra ekleyeceðiz - text rendering)
+            // show menu
         }
         else if (isSimulationRunning) {
             timeAccumulator += deltaTime * timeScale;
@@ -176,7 +172,7 @@ int main()
                 maxHeightLine, maxHeightText, finalRangeLine, finalRangeText, infoText, firstRangePosition, firstRangeText, firstRangeLine, sf::Color::Black);
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-                // Reset ve setting moduna dön
+                // When press R return to the menu
                 resetSimulation(projectile, maxHeightPosition, finalRangePosition, firstRangePosition, previousPositions);
                 isSetting = true;
                 isSimulationRunning = false;
@@ -186,7 +182,7 @@ int main()
         window.clear(sf::Color::White);
 
         if (isSetting) {
-            // Setting modunda farklý render
+            // different render in setting mode
             renderSettingMode(window, projectile, projectileShape, font, userSpeed, userAngle, positionY);
         }
         else {
