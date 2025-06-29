@@ -111,7 +111,7 @@ namespace Functions {
         }
     }
 
-    // FIXED: Simplified bouncing logic
+    // Simplified bouncing logic
     void setProjectile(bool isFinalRange, Projectile& projectile, Vector& wind, sf::CircleShape& projectileShape,
         std::vector<sf::Vector2f>& previousPositions, double& timeAccumulator, double& totalTime,
         double deltaTime, double timeScale, double resistanceCoefficient, double windowHeight, double positionY) {
