@@ -24,9 +24,9 @@ git clone https://github.com/YucelPehlevan/Projectile-Simulation.git
 - Yazarın açık yazılı izni olmadan ticari kullanım, yeniden dağıtım veya herhangi bir ticari yazılıma dahil edilmesi kesinlikle yasaktır.
 
 ## İletişim
-Geliştirici: Yücel Pehlevan, Enes Akın(Vector sınıfını birlikte oluşturduk)
-E-posta: yucelpehlevan16@gmail.com
-GitHub: https://github.com/YucelPehlevan
+- Geliştirici: Yücel Pehlevan, Enes Akın(Vector sınıfını birlikte oluşturduk)
+- E-posta: yucelpehlevan16@gmail.com
+- GitHub: https://github.com/YucelPehlevan
 
 ----- EN -----
 
@@ -54,6 +54,6 @@ git clone https://github.com/YucelPehlevan/Projectile-Simulation.git
 - Any commercial use, redistribution, or inclusion in proprietary software without explicit written permission from the author is strictly prohibited.
 
 ## Contact
-Developer: Yücel Pehlevan, Enes Akın (we developed the Vector class together)
-Email: yucelpehlevan16@gmail.com
-GitHub: https://github.com/YucelPehlevan
+- Developer: Yücel Pehlevan, Enes Akın (we developed the Vector class together)
+- Email: yucelpehlevan16@gmail.com
+- GitHub: https://github.com/YucelPehlevan
